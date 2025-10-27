@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:open_filex/open_filex.dart';
+
+
 import 'person.dart';
 
 void main() {
@@ -10,7 +10,7 @@ void main() {
 }
 
 class SearchPage extends StatefulWidget {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
@@ -106,55 +106,11 @@ class _SearchPageState extends State<SearchPage> {
       }
     });
   }
-  Future<void> _saveAsJson() async {
-    if (foundPerson == null) return;
-
-    try {
-      final dir = await getApplicationDocumentsDirectory();
-
-      String safe(String s) => s
-          .toLowerCase()
-          .replaceAll(RegExp(r'[^a-z0-9]+'), '_')
-          .replaceAll(RegExp(r'^_+|_+$'), '');
-      final baseName =
-          safe(foundPerson!.name.isEmpty ? 'person' : foundPerson!.name);
-      final ts = DateTime.now().millisecondsSinceEpoch;
-      final file = File('${dir.path}/$baseName-$ts.json');
-
-      final pretty =
-          const JsonEncoder.withIndent('  ').convert(foundPerson!.toJson());
-      await file.writeAsString(pretty);
-
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Đã lưu: ${file.path}')),
-      );
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Lỗi khi lưu JSON: $e')),
-      );
-    }
-  }
-
- 
-  Future<void> _openSaveFolder() async {
-    try {
-      final dir = await getApplicationDocumentsDirectory();
-      await OpenFilex.open(dir.path); 
-    } catch (e) {
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Không thể mở thư mục: $e')),
-      );
-    }
-  }
-
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tra cứu thông tin JSON')),
+      appBar: AppBar(title: const Text('Tra cứu thông tin')),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -184,23 +140,7 @@ class _SearchPageState extends State<SearchPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Hàng nút thao tác: Lưu JSON + Mở thư mục lưu
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton.icon(
-                          onPressed: _saveAsJson,
-                          icon: const Icon(Icons.save),
-                          label: const Text('Lưu JSON'),
-                        ),
-                        const SizedBox(width: 8),
-                        ElevatedButton.icon(
-                          onPressed: _openSaveFolder,
-                          icon: const Icon(Icons.folder_open),
-                          label: const Text('Mở thư mục lưu'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
+                    
 
                     // Card 1: Thông tin cá nhân 
                     Card(
