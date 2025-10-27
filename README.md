@@ -1,4 +1,5 @@
 # LTDNT-2025
 Code Lập trình đa nền tảng
 
-<img width="370" height="859" alt="image" src="https://github.com/user-attachments/assets/e1a8783c-93ae-44a3-b36a-ee2f7ca8335b" />
+<img width="380" height="886" alt="image" src="https://github.com/user-attachments/assets/d0539aa3-4cbc-45f0-a5a4-639df93ab85c" />
+
