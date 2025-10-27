@@ -1,0 +1,24 @@
+{
+    "name": "Nguyen Van A",
+    "email": "VanA@gmail.com",
+    "address": {
+        "city": "Da Nang",
+        "ward": "Hai Chau",
+        "street": "Le Duan",
+        "houseNumber": "123/45"
+    },
+    "schools": [
+        {
+        "name": "Da Nang University of Science and Technology",
+        "address": "Da Nang",
+        "yearIn": 2022,
+        "yearOut": 2027
+        },
+        {
+        "name": "Phan Chau Trinh High School",
+        "address": "Da Nang",
+        "yearIn": 2019,
+        "yearOut": 2022
+        }
+    ]
+}
